@@ -3,34 +3,60 @@ package com.placement.ServiceImplementation;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.placement.Entity.AdminEntity;
+import com.placement.Entity.CompanyEntity;
 import com.placement.Entity.StudentEntity;
+import com.placement.Entity.TrainingEntity;
 import com.placement.Exception.ResourceNotFoundException;
+import com.placement.Repository.AdminRepository;
+import com.placement.Repository.CompanyRepository;
 import com.placement.Repository.StudentRepository;
 import com.placement.Service.StudentService;
+import com.placement.Payloads.AdminDto;
+import com.placement.Payloads.CompanyDto;
 import com.placement.Payloads.StudentDto;
+import com.placement.Payloads.TrainingDto;
 
 @Service
 public class StudentServiceImpl implements StudentService
 {
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	@Autowired
+	private AdminRepository adminRepository;
+	
+	@Autowired
+	private ModelMapper modelMapper;
+	
+	@Autowired
+	private CompanyRepository companyRepository;
 
 	@Override
-	public StudentDto createStudent(StudentDto student) 
+	public StudentDto createStudent(StudentDto student,int adminId) 
 	{
-		StudentEntity studentEntity = this.studentDtoToStudentEntity(student);
-		StudentEntity savedStudent = this.studentRepository.save(studentEntity);
-		return this.studentEntityToStudentDto(savedStudent);
+		AdminEntity adminEntity=this.adminRepository.findById(adminId).
+				                orElseThrow(
+				                		()->new ResourceNotFoundException("Admin","AdminId",adminId));
+		student.setAdmin(this.modelMapper.map(adminEntity, AdminDto.class));
+		//StudentEntity studentEntity=this.modelMapper.map(student, StudentEntity.class);
+		//studentEntity.setAdmin(adminEntity);
+		List<CompanyEntity> company = this.companyRepository.findAll();
+		List<CompanyDto> companyDtoList = company.stream().map(companies->this.modelMapper.map(companies, CompanyDto.class)).collect(Collectors.toList());
+		student.setCompanyEntity(companyDtoList);
+		StudentEntity savedStudent=this.studentRepository.save(this.modelMapper.map(student, StudentEntity.class));
+		return this.modelMapper.map(savedStudent, StudentDto.class);
 	}
 
 	@Override
 	public List<StudentDto> getAllStudents() 
 	{
 		List<StudentEntity> studentList = this.studentRepository.findAll();
-		List<StudentDto> studentDtoList = studentList.stream().map(student->this.studentEntityToStudentDto(student)).collect(Collectors.toList());
+		List<StudentDto> studentDtoList = studentList.stream().map(student->this.modelMapper.map(student, StudentDto.class)).collect(Collectors.toList());
 		return studentDtoList;
 	}
 
@@ -38,7 +64,7 @@ public class StudentServiceImpl implements StudentService
 	public StudentDto getStudentById(int studentId)
 	{
 		StudentEntity studentEntity = this.studentRepository.findById(studentId).orElseThrow(()->new ResourceNotFoundException("Student", "StudentId",studentId));
-		return this.studentEntityToStudentDto(studentEntity);
+		return this.modelMapper.map(studentEntity, StudentDto.class);
 	}
 
 	@Override

@@ -12,52 +12,39 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Entity
-@Table(name="student")
-@Builder
-public class StudentEntity 
+public class AdminEntity 
 {
 	@Id
-	@SequenceGenerator(name = "stud", initialValue = 101, sequenceName = "stud")
-	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "stud")
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(name = "admin", initialValue = 101, sequenceName = "admin")
+	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "admin")
 
-	private int studentId;
+	private int adminId;
 	
 	@Column(nullable=false)
-	private String studentName;
+	private String adminName;
 	
 	@Column(nullable=false)
-	private String studentEmail;
-	
-	@Column(nullable=false)
-	private String studentContact;
-
-	@Column(nullable=false)
-	private String studentQualification;
+	private String adminEmail;
 	
 	@Column(nullable=false)
 	private String password;
 	
-	@ManyToOne
-	private AdminEntity admin;
-	
-	@OneToMany(cascade=CascadeType.ALL)
-	private List<CompanyEntity> companyEntity=new ArrayList<CompanyEntity>();
-	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<StudentEntity> studentEntity=new ArrayList<StudentEntity>();
 
-
+	
 }

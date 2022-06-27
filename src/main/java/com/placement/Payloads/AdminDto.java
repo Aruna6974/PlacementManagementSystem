@@ -1,5 +1,6 @@
 package com.placement.Payloads;
 
+
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -13,23 +14,16 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class StudentDto
+public class AdminDto 
 {
-	private int studentId;
+     private int adminId;
 	
-	private String studentName;
+	private String adminName;
 	
-	private String studentEmail;
-	
-	private String studentContact;
-	
-	private String studentQualification;
+	private String adminEmail;
 	
 	private String password;
 	
-	private AdminDto admin;
-	
-	private List<CompanyDto> companyEntity;
-	
-	
+	private List<StudentDto> studentEntity;
+
 }

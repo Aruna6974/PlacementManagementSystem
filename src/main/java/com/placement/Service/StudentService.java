@@ -8,7 +8,7 @@ import com.placement.Payloads.StudentDto;
 
 public interface StudentService 
 {
-	public StudentDto createStudent(StudentDto student);
+	public StudentDto createStudent(StudentDto student,int adminId);
 	
 	
 	public StudentDto getStudentById(int studentId);

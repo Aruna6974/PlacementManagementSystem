@@ -24,10 +24,10 @@ public class StudentController
 	@Autowired
 	private StudentService studentService;
 	
-	@PostMapping("/student")
-	public ResponseEntity<StudentDto> createStudent(@RequestBody StudentDto student)
+	@PostMapping("/admin/{adminId}/student")
+	public ResponseEntity<StudentDto> createStudent(@RequestBody StudentDto student,@PathVariable int adminId)
 	{
-		StudentDto createdstudent = this.studentService.createStudent(student);
+		StudentDto createdstudent = this.studentService.createStudent(student,adminId);
 		
 		return new ResponseEntity<StudentDto>(createdstudent,HttpStatus.CREATED);
 	}
