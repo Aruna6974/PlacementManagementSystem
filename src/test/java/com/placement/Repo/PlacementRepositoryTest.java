@@ -1,4 +1,4 @@
-package com.placement.Repo;
+package com.placement.repo;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,11 +14,11 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.placement.Entity.PlacementEntity;
-import com.placement.Entity.TrainingEntity;
-import com.placement.Repository.CompanyRepository;
-import com.placement.Repository.PlacementRepository;
-import com.placement.Repository.TrainingRepository;
+import com.placement.entity.PlacementEntity;
+import com.placement.entity.TrainingEntity;
+import com.placement.repository.CompanyRepository;
+import com.placement.repository.PlacementRepository;
+import com.placement.repository.TrainingRepository;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest

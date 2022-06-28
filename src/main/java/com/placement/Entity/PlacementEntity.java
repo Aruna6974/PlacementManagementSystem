@@ -1,4 +1,4 @@
-package com.placement.Entity;
+package com.placement.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,8 +25,9 @@ import lombok.ToString;
 public class PlacementEntity
 {
 	@Id
-	@SequenceGenerator(name = "plac", initialValue = 101, sequenceName = "plac")
-	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "plac")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@SequenceGenerator(name = "plac", initialValue = 101, sequenceName = "plac")
+//	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "plac")
 
 	private int placementId;
 	

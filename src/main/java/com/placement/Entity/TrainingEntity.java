@@ -1,4 +1,4 @@
-package com.placement.Entity;
+package com.placement.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +35,9 @@ import lombok.ToString;
 public class TrainingEntity
 {
 	@Id
-	@SequenceGenerator(name = "train", initialValue = 101, sequenceName = "train")
-	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "train")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@SequenceGenerator(name = "train", initialValue = 101, sequenceName = "train")
+//	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "train")
 
 	private int trainingId;
 	

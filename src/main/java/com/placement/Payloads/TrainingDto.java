@@ -1,9 +1,9 @@
-package com.placement.Payloads;
+package com.placement.payloads;
 
 import java.util.List;
 
-import com.placement.Entity.CompanyEntity;
-import com.placement.Entity.PlacementEntity;
+import com.placement.entity.CompanyEntity;
+import com.placement.entity.PlacementEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
-package com.placement.Payloads;
+package com.placement.payloads;
 
-import com.placement.Entity.TrainingEntity;
+import com.placement.entity.TrainingEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

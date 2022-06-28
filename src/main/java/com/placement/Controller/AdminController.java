@@ -1,4 +1,4 @@
-package com.placement.Controller;
+package com.placement.controller;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.placement.Exception.ApiResponse;
-import com.placement.Payloads.AdminDto;
-import com.placement.Service.AdminService;
+import com.placement.exception.ApiResponse;
+import com.placement.payloads.AdminDto;
+import com.placement.service.AdminService;
 
 @RestController
 @RequestMapping("/api")

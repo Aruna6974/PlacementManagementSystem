@@ -1,4 +1,4 @@
-package com.placement.Payloads;
+package com.placement.payloads;
 
 
 import java.util.List;

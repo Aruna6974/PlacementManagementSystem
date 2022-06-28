@@ -1,4 +1,4 @@
-package com.placement.Entity;
+package com.placement.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -32,8 +32,9 @@ import java.util.*;
 public class CompanyEntity
 {
 	@Id
-	@SequenceGenerator(name = "com", initialValue = 101, sequenceName = "com")
-	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "com")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@SequenceGenerator(name = "com", initialValue = 101, sequenceName = "com")
+//	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "com")
 
 	private int companyId;
 	

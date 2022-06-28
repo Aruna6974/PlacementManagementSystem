@@ -1,4 +1,4 @@
-package com.placement.Controller;
+package com.placement.controller;
 
 import java.util.List;
 
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.placement.Exception.ApiResponse;
-import com.placement.Payloads.CompanyDto;
-import com.placement.Service.CompanyService;
+import com.placement.exception.ApiResponse;
+import com.placement.payloads.CompanyDto;
+import com.placement.service.CompanyService;
 
 @RestController
 @RequestMapping("/api")
@@ -26,18 +26,23 @@ public class CompanyController
 	@Autowired
 	private CompanyService companyService;
 	
+	//To create a company resources
 	@PostMapping("/student/{studentId}/company")
 	public ResponseEntity<CompanyDto> createCompany(@PathVariable int studentId,@RequestBody CompanyDto companyDto)
 	{
 		CompanyDto createdCompany = this.companyService.createCompany(companyDto, studentId);
 		return new ResponseEntity<CompanyDto>(createdCompany,HttpStatus.CREATED);
 	}
+	
+	//To fetch all the company records as a list
 	@GetMapping("/company")
 	public ResponseEntity<List<CompanyDto>> getAllCompanies()
 	{
 		List<CompanyDto> allCompanies = this.companyService.getAllCompanies();
 		return new ResponseEntity<List<CompanyDto>>(allCompanies,HttpStatus.OK);
 	}
+	
+	//To fetch a particular company record by company Id
 	@GetMapping("/company/{companyId}")
 	public ResponseEntity<CompanyDto> getCompanyById(@PathVariable int companyId)
 	{
@@ -45,6 +50,7 @@ public class CompanyController
 		return new ResponseEntity<CompanyDto>(companyDto,HttpStatus.OK);
 	}
 	
+	//To update a company record by company id
 	@PutMapping("/company/{companyId}")
 	public ResponseEntity<CompanyDto> updateCompaniesById(@RequestBody CompanyDto companyDto ,@PathVariable int companyId)
 	{
@@ -53,6 +59,8 @@ public class CompanyController
 		return new ResponseEntity<CompanyDto>(updateCompanies,HttpStatus.OK);
 		
 	}
+	
+	//To delete company by id
 	@DeleteMapping("/company/{companyId}")
 	public ResponseEntity<ApiResponse> deleteCompanyById(@PathVariable int companyId)
 	{
@@ -63,6 +71,8 @@ public class CompanyController
 		return new ResponseEntity<ApiResponse>(response,HttpStatus.OK);
 		
 	}
+	
+	// To fetch company record by student id
 	@GetMapping("/companies/{studentId}")
 	public ResponseEntity<List<CompanyDto>> getAllCompaniesByStudent(@PathVariable int studentId)
 	{

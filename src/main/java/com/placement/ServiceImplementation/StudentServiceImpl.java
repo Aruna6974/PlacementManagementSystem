@@ -1,4 +1,4 @@
-package com.placement.ServiceImplementation;
+package com.placement.serviceimplementation;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,19 +7,19 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.placement.Entity.AdminEntity;
-import com.placement.Entity.CompanyEntity;
-import com.placement.Entity.StudentEntity;
-import com.placement.Entity.TrainingEntity;
-import com.placement.Exception.ResourceNotFoundException;
-import com.placement.Repository.AdminRepository;
-import com.placement.Repository.CompanyRepository;
-import com.placement.Repository.StudentRepository;
-import com.placement.Service.StudentService;
-import com.placement.Payloads.AdminDto;
-import com.placement.Payloads.CompanyDto;
-import com.placement.Payloads.StudentDto;
-import com.placement.Payloads.TrainingDto;
+import com.placement.entity.AdminEntity;
+import com.placement.entity.CompanyEntity;
+import com.placement.entity.StudentEntity;
+import com.placement.entity.TrainingEntity;
+import com.placement.exception.ResourceNotFoundException;
+import com.placement.payloads.AdminDto;
+import com.placement.payloads.CompanyDto;
+import com.placement.payloads.StudentDto;
+import com.placement.payloads.TrainingDto;
+import com.placement.repository.AdminRepository;
+import com.placement.repository.CompanyRepository;
+import com.placement.repository.StudentRepository;
+import com.placement.service.StudentService;
 
 @Service
 public class StudentServiceImpl implements StudentService

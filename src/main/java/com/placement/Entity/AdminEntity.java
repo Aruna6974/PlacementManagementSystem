@@ -1,4 +1,4 @@
-package com.placement.Entity;
+package com.placement.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,12 +26,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class AdminEntity 
 {
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@SequenceGenerator(name = "admin", initialValue = 101, sequenceName = "admin")
-	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "admin")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@SequenceGenerator(name = "admin", initialValue = 101, sequenceName = "admin")
+//	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "admin")
 
 	private int adminId;
 	

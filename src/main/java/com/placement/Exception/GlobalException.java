@@ -1,4 +1,4 @@
-package com.placement.Exception;
+package com.placement.exception;
 
 import java.util.HashSet;
 import java.util.Set;

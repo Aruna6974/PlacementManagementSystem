@@ -1,4 +1,4 @@
-package com.placement.Controller;
+package com.placement.controller;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.placement.Exception.ApiResponse;
-import com.placement.Payloads.TrainingDto;
-import com.placement.Service.TrainingService;
+import com.placement.exception.ApiResponse;
+import com.placement.payloads.TrainingDto;
+import com.placement.service.TrainingService;
 
 @RestController
 @RequestMapping("/api")
@@ -28,6 +28,7 @@ public class TrainingController
 	@Autowired
 	private TrainingService trainingService;
 	
+	//To create a training resources
 	@PostMapping("/company/{companyId}/training")
 	public ResponseEntity<TrainingDto> createTraining( @Valid @PathVariable int companyId,@RequestBody TrainingDto trainingDto)
 	{
@@ -35,12 +36,16 @@ public class TrainingController
 		return new ResponseEntity<TrainingDto>(createTrainingDto,HttpStatus.CREATED);
 		
 	}
+	
+	//To fetch particular record by training id
 	@GetMapping("/training/{trainingId}")
 	public ResponseEntity<TrainingDto> getTrainingById(@PathVariable int trainingId)
 	{
 		TrainingDto getTraining = this.trainingService.getTrainingById(trainingId);
 		return new ResponseEntity<TrainingDto>(getTraining,HttpStatus.OK);
 	}
+	
+	//To fetch all the training records as a list
 	@GetMapping("/training")
 	public ResponseEntity<List<TrainingDto>> getAllTrainings()
 	{
@@ -48,12 +53,16 @@ public class TrainingController
 		return new ResponseEntity<List<TrainingDto>>(getTrainings,HttpStatus.OK);
 		
 	}
+	
+	//To update a training record by training id
 	@PutMapping("/training/{trainingId}")
 	public ResponseEntity<TrainingDto> updateTrainingById(@RequestBody TrainingDto trainingDto,@PathVariable int trainingId)
 	{
 		TrainingDto updatedTraining = this.trainingService.updateTrainingById(trainingDto, trainingId);
 		return new ResponseEntity<TrainingDto>(updatedTraining,HttpStatus.OK);
 	}
+	
+	//To delete training by id
 	@DeleteMapping("/training/{trainingId}")
 	public ResponseEntity<ApiResponse> deleteTrainingById(@PathVariable int trainingId)
 	{
@@ -63,6 +72,8 @@ public class TrainingController
 		response.setSuccess(true);
 		return new ResponseEntity<ApiResponse>(response,HttpStatus.OK);
 	}
+	
+	//To fetch training record by Using company id
 	@GetMapping("/trainings/{companyId}")
 	public ResponseEntity<List<TrainingDto>> getAllTrainingsByCompany(@PathVariable int companyId)
 	{

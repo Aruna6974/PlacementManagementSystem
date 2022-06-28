@@ -1,13 +1,13 @@
-package com.placement.Repository;
+package com.placement.repository;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.placement.Entity.CompanyEntity;
-import com.placement.Entity.StudentEntity;
-import com.placement.Payloads.CompanyDto;
+import com.placement.entity.CompanyEntity;
+import com.placement.entity.StudentEntity;
+import com.placement.payloads.CompanyDto;
 
 public interface CompanyRepository  extends JpaRepository<CompanyEntity,Integer>
 {

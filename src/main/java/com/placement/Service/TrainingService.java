@@ -1,8 +1,8 @@
-package com.placement.Service;
+package com.placement.service;
 
 import java.util.List;
 
-import com.placement.Payloads.TrainingDto;
+import com.placement.payloads.TrainingDto;
 
 public interface TrainingService 
 {

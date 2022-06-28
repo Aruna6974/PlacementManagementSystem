@@ -1,10 +1,10 @@
-package com.placement.Repository;
+package com.placement.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.placement.Entity.StudentEntity;
+import com.placement.entity.StudentEntity;
 
 
 

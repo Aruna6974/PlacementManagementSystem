@@ -1,4 +1,4 @@
-package com.placement.Payloads;
+package com.placement.payloads;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.placement.Entity.StudentEntity;
+import com.placement.entity.StudentEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

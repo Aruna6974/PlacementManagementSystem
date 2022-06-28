@@ -1,4 +1,4 @@
-package com.placement.Entity;
+package com.placement.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +32,9 @@ import lombok.ToString;
 public class StudentEntity 
 {
 	@Id
-	@SequenceGenerator(name = "stud", initialValue = 101, sequenceName = "stud")
-	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "stud")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@SequenceGenerator(name = "stud", initialValue = 101, sequenceName = "stud")
+//	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "stud")
 
 	private int studentId;
 	

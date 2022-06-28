@@ -1,4 +1,4 @@
-package com.placement.Exception;
+package com.placement.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

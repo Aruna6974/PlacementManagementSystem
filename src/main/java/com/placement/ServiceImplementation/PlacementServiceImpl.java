@@ -1,4 +1,4 @@
-package com.placement.ServiceImplementation;
+package com.placement.serviceimplementation;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,13 +7,13 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.placement.Entity.PlacementEntity;
-import com.placement.Entity.TrainingEntity;
-import com.placement.Exception.ResourceNotFoundException;
-import com.placement.Payloads.PlacementDto;
-import com.placement.Repository.PlacementRepository;
-import com.placement.Repository.TrainingRepository;
-import com.placement.Service.PlacementService;
+import com.placement.entity.PlacementEntity;
+import com.placement.entity.TrainingEntity;
+import com.placement.exception.ResourceNotFoundException;
+import com.placement.payloads.PlacementDto;
+import com.placement.repository.PlacementRepository;
+import com.placement.repository.TrainingRepository;
+import com.placement.service.PlacementService;
 @Service
 public class PlacementServiceImpl  implements PlacementService
 {

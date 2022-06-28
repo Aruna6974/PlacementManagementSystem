@@ -1,4 +1,4 @@
-package com.placement.ServiceImplementation;
+package com.placement.serviceimplementation;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,12 +7,12 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.placement.Entity.AdminEntity;
-import com.placement.Exception.ResourceNotFoundException;
-import com.placement.Payloads.AdminDto;
-import com.placement.Repository.AdminRepository;
-import com.placement.Repository.StudentRepository;
-import com.placement.Service.AdminService;
+import com.placement.entity.AdminEntity;
+import com.placement.exception.ResourceNotFoundException;
+import com.placement.payloads.AdminDto;
+import com.placement.repository.AdminRepository;
+import com.placement.repository.StudentRepository;
+import com.placement.service.AdminService;
 @Repository
 public class AdminServiceImplementation implements AdminService
 {
@@ -50,7 +50,7 @@ public class AdminServiceImplementation implements AdminService
 	public List<AdminDto> getAllAdmins()
 	{
 		List<AdminEntity> adminEntity=this.adminRepository.findAll();
-		List<AdminDto> adminDtoList=adminEntity.stream().map(admin->this.modelMapper.map(adminEntity, AdminDto.class)).collect(Collectors.toList());
+		List<AdminDto> adminDtoList=adminEntity.stream().map(admin->this.modelMapper.map(admin, AdminDto.class)).collect(Collectors.toList());
 		return adminDtoList;
 	}
 
