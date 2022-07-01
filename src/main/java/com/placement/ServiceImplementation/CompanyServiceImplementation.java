@@ -12,6 +12,7 @@ import com.placement.entity.StudentEntity;
 import com.placement.entity.TrainingEntity;
 import com.placement.exception.ResourceNotFoundException;
 import com.placement.payloads.CompanyDto;
+import com.placement.payloads.StudentDto;
 import com.placement.payloads.TrainingDto;
 import com.placement.repository.CompanyRepository;
 import com.placement.repository.StudentRepository;
@@ -37,14 +38,14 @@ public class CompanyServiceImplementation  implements CompanyService
 		StudentEntity studentEntity = this.studentRepository.findById(studentId).
 				  orElseThrow(
 						  ()->new ResourceNotFoundException("Student","StudentId",studentId));
-		companyDto.setStudent(studentEntity);
+		companyDto.setStudent(this.modelMapper.map(studentEntity, StudentDto.class));
 		
 		List<TrainingEntity> trainings = this.trainingRepository.findAll();
 		List<TrainingDto> trainingDtoList = trainings.stream().map(training->this.modelMapper.map(training, TrainingDto.class)).collect(Collectors.toList());
 		companyDto.setTrainingDtoList(trainingDtoList);
-		CompanyEntity companyEntity =this.companyRepository.save(this.companyDtoToCompanyEntity(companyDto));
+		CompanyEntity companyEntity =this.companyRepository.save(this.modelMapper.map(companyDto, CompanyEntity.class));
 		
-		return this.companyEntityToCompanyDto(companyEntity);
+		return this.modelMapper.map(companyEntity, CompanyDto.class);
 		
 	}
 
@@ -88,10 +89,11 @@ public class CompanyServiceImplementation  implements CompanyService
 	@Override
 	public List<CompanyDto> getAllCompaniesByStudent(int studentId) 
 	{
-		StudentEntity studentEntity = this.studentRepository.findById(studentId).
-				orElseThrow(
-				             ()->new ResourceNotFoundException("Student","StudentId",studentId));
-		List<CompanyEntity> companies = this.companyRepository.findByStudent(studentEntity);
+//		StudentEntity studentEntity = this.studentRepository.findById(studentId).
+//				orElseThrow(
+//				             ()->new ResourceNotFoundException("Student","StudentId",studentId));
+		List<CompanyEntity> companies = this.companyRepository.getCompanyEntityByStudid(studentId);
+		System.out.println("List of Companies"+companies);
 		List<CompanyDto> companyDtoList = companies.stream().map(company->this.modelMapper.map(company, CompanyDto.class)).collect(Collectors.toList());
 		return companyDtoList;
 	}

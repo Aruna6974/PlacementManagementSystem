@@ -88,10 +88,11 @@ public class PlacementServiceImpl  implements PlacementService
 	@Override
 	public List<PlacementDto> getAllPlacementsByTraining(int trainingId) 
 	{
-		TrainingEntity trainingEntity = this.trainingRepository.findById(trainingId).
-			    orElseThrow(
-			    		()->new ResourceNotFoundException("Training","TrainingId",trainingId));
-		List<PlacementEntity> placements = this.placementRepository.findByTraining(trainingEntity);
+//		TrainingEntity trainingEntity = this.trainingRepository.findById(trainingId).
+//			    orElseThrow(
+//			    		()->new ResourceNotFoundException("Training","TrainingId",trainingId));
+		List<PlacementEntity> placements = this.placementRepository.getPlacementEntityByPlacid(trainingId);
+		System.out.println("List Of Placements"+placements);
 		List<PlacementDto> placementDtoList = placements.stream().map(placement->this.modelMapper.map(placement, PlacementDto.class)).collect(Collectors.toList()); 
 		
 		return placementDtoList;

@@ -87,10 +87,11 @@ public class TrainingServiceImpl implements TrainingService
 	@Override
 	public List<TrainingDto> getAllTrainingsByCompany(int companyId) 
 	{
-		CompanyEntity companyEntity = this.companyrepository.findById(companyId).
-				   orElseThrow(
-						   ()->new ResourceNotFoundException("Company","CompanyId",companyId));
-		List<TrainingEntity> trainings = this.trainingRepository.findByCompany(companyEntity);
+//		CompanyEntity companyEntity = this.companyrepository.findById(companyId).
+//				   orElseThrow(
+//						   ()->new ResourceNotFoundException("Company","CompanyId",companyId));
+		List<TrainingEntity> trainings = this.trainingRepository.getTrainingEntityByCompid(companyId);
+		System.out.println("List Of Trainings"+trainings);
 		List<TrainingDto> trainingDtoList = trainings.stream().map(training->this.modelMapper.map(training, TrainingDto.class)).collect(Collectors.toList());
 		
 		return trainingDtoList;

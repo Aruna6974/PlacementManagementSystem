@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.placement.entity.AdminEntity;
 import com.placement.exception.ResourceNotFoundException;
@@ -13,7 +14,7 @@ import com.placement.payloads.AdminDto;
 import com.placement.repository.AdminRepository;
 import com.placement.repository.StudentRepository;
 import com.placement.service.AdminService;
-@Repository
+@Service
 public class AdminServiceImplementation implements AdminService
 {
 
@@ -30,9 +31,9 @@ public class AdminServiceImplementation implements AdminService
 	@Override
 	public AdminDto createAdmin(AdminDto adminDto) 
 	{
-		AdminEntity adminEntity=this.adminDtoToAdminEntity(adminDto);
+		AdminEntity adminEntity=this.modelMapper.map(adminDto, AdminEntity.class);
 		AdminEntity savedAdmin=this.adminRepository.save(adminEntity); 
-		return this.adminEntityToAdminDto(savedAdmin);
+		return this.modelMapper.map(savedAdmin, AdminDto.class);
 	}
 
 
@@ -59,8 +60,8 @@ public class AdminServiceImplementation implements AdminService
 	{
 		AdminEntity adminEntity=this.adminRepository.findById(adminId).orElseThrow(()->new ResourceNotFoundException("Admin","AdminId",adminId));
 		// TODO Auto-generated method stub
-		AdminEntity updateAdmin=this.adminRepository.save(this.adminDtoToAdminEntity(adminDto));
-		return this.adminEntityToAdminDto(updateAdmin);
+		AdminEntity updateAdmin=this.adminRepository.save(this.modelMapper.map(adminDto, AdminEntity.class));
+		return this.modelMapper.map(updateAdmin, AdminDto.class);
 	}
 
 	@Override

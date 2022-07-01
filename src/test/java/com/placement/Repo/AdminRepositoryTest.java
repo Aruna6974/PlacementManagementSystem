@@ -61,19 +61,5 @@ public class AdminRepositoryTest
 		AdminEntity admin1=adminRepository.save(admin);
 		Assertions.assertThat(admin1.getAdminEmail()).isEqualTo("aruna@gmail.com");
 	}
-//	@Test
-//	@Order(5)
-//	public void deleteAdminById()
-//	{
-//		AdminEntity admin=adminRepository.findById(1).get();
-//		adminRepository.delete(admin);
-//		AdminEntity admin1=null;
-//		Optional<AdminEntity> optionalAdmin=adminRepository.findByadminEmail("aruna@gmail.com");
-//		if(optionalAdmin.isPresent())
-//		{
-//			admin1=optionalAdmin.get();
-//		}
-//		Assertions.assertThat(admin1).isNull();
-//	}
 
 }

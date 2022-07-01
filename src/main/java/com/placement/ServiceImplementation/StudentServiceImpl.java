@@ -73,13 +73,16 @@ public class StudentServiceImpl implements StudentService
 		StudentEntity studentEntity = this.studentRepository.
 				findById(studentId).orElseThrow(
 						()->new ResourceNotFoundException("Student", "StudentId",studentId));
-		studentEntity.setStudentId(studentDto.getStudentId());
-		studentEntity.setStudentName(studentDto.getStudentName());
-		studentEntity.setStudentEmail(studentDto.getStudentEmail());
-		studentEntity.setStudentContact(studentDto.getStudentContact());
-		studentEntity.setStudentQualification(studentDto.getStudentQualification());
-		studentEntity.setPassword(studentDto.getPassword());
-		return this.studentEntityToStudentDto(studentEntity);
+//		studentEntity.setStudentId(studentDto.getStudentId());
+//		studentEntity.setStudentName(studentDto.getStudentName());
+//		studentEntity.setStudentEmail(studentDto.getStudentEmail());
+//		studentEntity.setStudentContact(studentDto.getStudentContact());
+//		studentEntity.setStudentQualification(studentDto.getStudentQualification());
+//		studentEntity.setPassword(studentDto.getPassword());
+		//return this.studentEntityToStudentDto(studentEntity);
+		//return this.modelMapper.map(studentEntity, StudentDto.class);
+		StudentEntity updateStudent = this.studentRepository.save(this.studentDtoToStudentEntity(studentDto));
+		return this.studentEntityToStudentDto(updateStudent);
 	}
 
 	@Override

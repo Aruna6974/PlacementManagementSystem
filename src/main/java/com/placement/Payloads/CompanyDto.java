@@ -27,6 +27,6 @@ public class CompanyDto
 	private String companyType;
 	private String companyDescription;
 
-	private StudentEntity student;
+	private StudentDto student;
 	private List<TrainingDto> trainingDtoList;
 }
