@@ -2,6 +2,8 @@ package com.placement.controller;
 
 import java.util.List;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ public class AdminController
 	
 	//To create admin Resource 
 	@PostMapping("/admin")
-	public ResponseEntity<AdminDto> createAdmin(@RequestBody AdminDto adminDto)
+	public ResponseEntity<AdminDto> createAdmin( @RequestBody AdminDto adminDto)
 	{
 		AdminDto createAdmin=this.adminService.createAdmin(adminDto);
 		return new ResponseEntity<AdminDto>(createAdmin,HttpStatus.CREATED);

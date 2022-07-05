@@ -28,7 +28,7 @@ public class CompanyController
 	
 	//To create a company resources
 	@PostMapping("/student/{studentId}/company")
-	public ResponseEntity<CompanyDto> createCompany(@PathVariable int studentId,@RequestBody CompanyDto companyDto)
+	public ResponseEntity<CompanyDto> createCompany( @PathVariable int studentId,@RequestBody CompanyDto companyDto)
 	{
 		CompanyDto createdCompany = this.companyService.createCompany(companyDto, studentId);
 		return new ResponseEntity<CompanyDto>(createdCompany,HttpStatus.CREATED);

@@ -2,6 +2,8 @@ package com.placement.payloads;
 
 import java.util.List;
 
+import com.placement.entity.AdminEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,9 +29,9 @@ public class StudentDto
 	
 	private String password;
 	
-	private AdminDto admin;
+	private AdminEntity admin;
 	
-	private List<CompanyDto> companyEntity;
+	private List<CompanyDto> compayDtoList;
 	
 	
 }

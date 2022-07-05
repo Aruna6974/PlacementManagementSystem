@@ -38,7 +38,7 @@ public class CompanyServiceImplementation  implements CompanyService
 		StudentEntity studentEntity = this.studentRepository.findById(studentId).
 				  orElseThrow(
 						  ()->new ResourceNotFoundException("Student","StudentId",studentId));
-		companyDto.setStudent(this.modelMapper.map(studentEntity, StudentDto.class));
+		companyDto.setStudent(studentEntity);
 		
 		List<TrainingEntity> trainings = this.trainingRepository.findAll();
 		List<TrainingDto> trainingDtoList = trainings.stream().map(training->this.modelMapper.map(training, TrainingDto.class)).collect(Collectors.toList());

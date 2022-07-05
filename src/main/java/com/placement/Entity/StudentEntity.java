@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,9 +35,6 @@ public class StudentEntity
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@SequenceGenerator(name = "stud", initialValue = 101, sequenceName = "stud")
-//	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "stud")
-
 	private int studentId;
 	
 	@Column(nullable=false)

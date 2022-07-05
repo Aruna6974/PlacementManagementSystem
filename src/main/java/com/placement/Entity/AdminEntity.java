@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,12 +33,9 @@ public class AdminEntity
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@SequenceGenerator(name = "admin", initialValue = 101, sequenceName = "admin")
-//	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "admin")
-
 	private int adminId;
 	
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String adminName;
 	
 	@Column(nullable=false)

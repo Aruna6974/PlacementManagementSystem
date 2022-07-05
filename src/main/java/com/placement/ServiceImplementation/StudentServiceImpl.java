@@ -42,12 +42,12 @@ public class StudentServiceImpl implements StudentService
 		AdminEntity adminEntity=this.adminRepository.findById(adminId).
 				                orElseThrow(
 				                		()->new ResourceNotFoundException("Admin","AdminId",adminId));
-		student.setAdmin(this.modelMapper.map(adminEntity, AdminDto.class));
+		student.setAdmin(adminEntity);
 		//StudentEntity studentEntity=this.modelMapper.map(student, StudentEntity.class);
 		//studentEntity.setAdmin(adminEntity);
 		List<CompanyEntity> company = this.companyRepository.findAll();
 		List<CompanyDto> companyDtoList = company.stream().map(companies->this.modelMapper.map(companies, CompanyDto.class)).collect(Collectors.toList());
-		student.setCompanyEntity(companyDtoList);
+		student.setCompayDtoList(companyDtoList);
 		StudentEntity savedStudent=this.studentRepository.save(this.modelMapper.map(student, StudentEntity.class));
 		return this.modelMapper.map(savedStudent, StudentDto.class);
 	}

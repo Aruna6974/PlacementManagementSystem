@@ -20,13 +20,6 @@ public class GlobalException extends RuntimeException {
 
 	}
 
-//	@ExceptionHandler(DataIntegrityViolationException.class)
-//	public ResponseEntity<Set<String>> DataIntegrityViolationException(DataIntegrityViolationException dt)
-//	{
-//		Set<String> set = new HashSet<String>();
-//		dt.get
-//		
-//	}
 	@ExceptionHandler(ConstraintViolationException.class)
 	public ResponseEntity<Set<String>> constraintViolationException(ConstraintViolationException cv)
 
@@ -38,10 +31,4 @@ public class GlobalException extends RuntimeException {
 		});
 		return new ResponseEntity<Set<String>>(set, HttpStatus.BAD_REQUEST);
 	}
-
-//	@ExceptionHandler(DataIntegrityViolationException.class)
-//    public ResponseEntity<ApiResponse> DataIntegrityViolationException(HttpServletRequest req, DataIntegrityViolationException e) {
-//        //return exceptionInfoHandler.getApiResponseResponseEntity(req, e, HttpStatus.CONFLICT);
-//        return new ResponseEntity<ApiResponse>(HttpStatus.BAD_REQUEST);
-//    }
 }

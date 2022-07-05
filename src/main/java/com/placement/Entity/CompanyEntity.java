@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -33,12 +35,9 @@ public class CompanyEntity
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@SequenceGenerator(name = "com", initialValue = 101, sequenceName = "com")
-//	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "com")
-
 	private int companyId;
 	
-	@Column(nullable = false)
+	@Column(nullable =false)
 	private String companyName;
 	
 	@Column(nullable = false)
