@@ -59,7 +59,6 @@ public class AdminServiceImplementation implements AdminService
 	public AdminDto updateAdminById(AdminDto adminDto, int adminId) 
 	{
 		AdminEntity adminEntity=this.adminRepository.findById(adminId).orElseThrow(()->new ResourceNotFoundException("Admin","AdminId",adminId));
-		// TODO Auto-generated method stub
 		AdminEntity updateAdmin=this.adminRepository.save(this.modelMapper.map(adminDto, AdminEntity.class));
 		return this.modelMapper.map(updateAdmin, AdminDto.class);
 	}
@@ -73,14 +72,12 @@ public class AdminServiceImplementation implements AdminService
 	}
 	private AdminDto adminEntityToAdminDto(AdminEntity savedAdmin)
 	{
-		// TODO Auto-generated method stub
 		return this.modelMapper.map(savedAdmin, AdminDto.class);
 	}
 
 
 	private AdminEntity adminDtoToAdminEntity(AdminDto adminDto)
 	{
-		// TODO Auto-generated method stub
 		return this.modelMapper.map(adminDto, AdminEntity.class);
 	}
 

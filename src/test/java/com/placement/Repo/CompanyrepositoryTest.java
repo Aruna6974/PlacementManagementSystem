@@ -50,7 +50,7 @@ public class CompanyrepositoryTest
 	@Order(1)
 	public void getCompanyById()
 	{
-		CompanyEntity company=companyRepository.findById(101).get();
+		CompanyEntity company=companyRepository.findById(1).get();
 		Assertions.assertThat(company.getCompanyId()).isGreaterThan(0);
 	}
 	@Test
@@ -64,7 +64,7 @@ public class CompanyrepositoryTest
 	@Order(3)
 	public void updateCompany()
 	{
-		CompanyEntity company=companyRepository.findById(102).get();
+		CompanyEntity company=companyRepository.findById(1).get();
 		company.setCompanyAddress("Bangalore");
 	    CompanyEntity company1=companyRepository.save(company);
 		Assertions.assertThat(company1.getCompanyAddress()).isEqualTo("Bangalore");
@@ -73,7 +73,7 @@ public class CompanyrepositoryTest
 	@Order(5)
 	public void deleteCompany()
 	{
-		 CompanyEntity company = companyRepository.findById(102).get();
+		 CompanyEntity company = companyRepository.findById(1).get();
 		 companyRepository.delete(company);
 		  CompanyEntity company1=null;
 		  Optional<CompanyEntity> optionalCompany=companyRepository.findBycompanyType("IT");
@@ -88,7 +88,7 @@ public class CompanyrepositoryTest
 	@Order(6)
 	public void getCompanyByStudent()
 	{
-		StudentEntity student=studentRepository.findById(101).get();
+		StudentEntity student=studentRepository.findById(1).get();
 		List<CompanyEntity> companyList=companyRepository.findByStudent(student);
 		Assertions.assertThat(companyList.size()).isGreaterThan(0);
 		

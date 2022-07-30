@@ -27,10 +27,10 @@ public class CompanyController
 	private CompanyService companyService;
 	
 	//To create a company resources
-	@PostMapping("/student/{studentId}/company")
-	public ResponseEntity<CompanyDto> createCompany( @PathVariable int studentId,@RequestBody CompanyDto companyDto)
+	@PostMapping("/placement/{placementId}/company")
+	public ResponseEntity<CompanyDto> createCompany( @PathVariable int placementId,@RequestBody CompanyDto companyDto)
 	{
-		CompanyDto createdCompany = this.companyService.createCompany(companyDto, studentId);
+		CompanyDto createdCompany = this.companyService.createCompany(companyDto, placementId);
 		return new ResponseEntity<CompanyDto>(createdCompany,HttpStatus.CREATED);
 	}
 	
@@ -72,11 +72,11 @@ public class CompanyController
 		
 	}
 	
-	// To fetch company record by student id
-	@GetMapping("/companies/{studentId}")
-	public ResponseEntity<List<CompanyDto>> getAllCompaniesByStudent(@PathVariable int studentId)
+	// To fetch company record by placement id
+	@GetMapping("/companies/{placementId}")
+	public ResponseEntity<List<CompanyDto>> getAllCompaniesByPlacementId(@PathVariable int placementId)
 	{
-		List<CompanyDto> allCompaniesByStudent = this.companyService.getAllCompaniesByStudent(studentId);
+		List<CompanyDto> allCompaniesByStudent = this.companyService.getAllCompaniesByPlacementId(placementId);
 		return new ResponseEntity<List<CompanyDto>>(allCompaniesByStudent,HttpStatus.OK);
 	}
 }

@@ -3,6 +3,8 @@ package com.placement.payloads;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +26,7 @@ public class AdminDto
 	
 	private String password;
 	
-	private List<StudentDto> studentEntity;
+	@JsonManagedReference
+	private List<StudentDto> student;
 
 }

@@ -17,6 +17,6 @@ public interface TrainingService
 	
 	public void deleteTrainingById(int trainingId);
 	
-	public List<TrainingDto> getAllTrainingsByCompany(int companyId);
+	public List<TrainingDto> getAllTrainingsByCompanyId(int companyId);
 
 }

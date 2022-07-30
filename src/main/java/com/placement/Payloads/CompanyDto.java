@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.placement.entity.StudentEntity;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +29,9 @@ public class CompanyDto
 	private String companyType;
 	private String companyDescription;
 
-	private StudentEntity student;
-	private List<TrainingDto> trainingDtoList;
+	@JsonBackReference
+	private PlacementDto placement;
+	
+	@JsonManagedReference
+	private List<TrainingDto> training;
 }

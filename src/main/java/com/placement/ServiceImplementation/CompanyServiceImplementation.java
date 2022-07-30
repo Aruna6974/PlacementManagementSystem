@@ -8,13 +8,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.placement.entity.CompanyEntity;
+import com.placement.entity.PlacementEntity;
 import com.placement.entity.StudentEntity;
 import com.placement.entity.TrainingEntity;
 import com.placement.exception.ResourceNotFoundException;
 import com.placement.payloads.CompanyDto;
+import com.placement.payloads.PlacementDto;
 import com.placement.payloads.StudentDto;
 import com.placement.payloads.TrainingDto;
 import com.placement.repository.CompanyRepository;
+import com.placement.repository.PlacementRepository;
 import com.placement.repository.StudentRepository;
 import com.placement.repository.TrainingRepository;
 import com.placement.service.CompanyService;
@@ -28,24 +31,26 @@ public class CompanyServiceImplementation  implements CompanyService
 	private ModelMapper modelMapper;
 	
 	@Autowired
-	private StudentRepository studentRepository;
-	@Autowired
 	private TrainingRepository trainingRepository;
+	
+	@Autowired
+	private PlacementRepository placementRepository;
 
 	@Override
-	public CompanyDto createCompany(CompanyDto companyDto, int studentId)
+	public CompanyDto createCompany(CompanyDto companyDto, int placementId)
 	{
-		StudentEntity studentEntity = this.studentRepository.findById(studentId).
-				  orElseThrow(
-						  ()->new ResourceNotFoundException("Student","StudentId",studentId));
-		companyDto.setStudent(studentEntity);
+		PlacementEntity placementEntity=this.placementRepository.findById(placementId).
+				orElseThrow(
+						()->new ResourceNotFoundException("Placement", "PlacementId", placementId));
+		CompanyEntity companyEntity=this.modelMapper.map(companyDto, CompanyEntity.class);
+		companyEntity.setPlacement(placementEntity);
+			//	companyDto.setPlacement(this.modelMapper.map(placementEntity, PlacementDto.class));
+//		List<TrainingEntity> trainings=this.trainingRepository.findAll();
+//		List<TrainingDto> trainingList=trainings.stream().map(training->this.modelMapper.map(training, TrainingDto.class)).collect(Collectors.toList());
+//		companyDto.setTraining(trainingList);
+		CompanyEntity createdCompanyEntity =this.companyRepository.save(companyEntity);
 		
-		List<TrainingEntity> trainings = this.trainingRepository.findAll();
-		List<TrainingDto> trainingDtoList = trainings.stream().map(training->this.modelMapper.map(training, TrainingDto.class)).collect(Collectors.toList());
-		companyDto.setTrainingDtoList(trainingDtoList);
-		CompanyEntity companyEntity =this.companyRepository.save(this.modelMapper.map(companyDto, CompanyEntity.class));
-		
-		return this.modelMapper.map(companyEntity, CompanyDto.class);
+		return this.modelMapper.map(createdCompanyEntity, CompanyDto.class);
 		
 	}
 
@@ -87,13 +92,10 @@ public class CompanyServiceImplementation  implements CompanyService
 	}
 
 	@Override
-	public List<CompanyDto> getAllCompaniesByStudent(int studentId) 
+	public List<CompanyDto> getAllCompaniesByPlacementId(int placementId) 
 	{
-//		StudentEntity studentEntity = this.studentRepository.findById(studentId).
-//				orElseThrow(
-//				             ()->new ResourceNotFoundException("Student","StudentId",studentId));
-		List<CompanyEntity> companies = this.companyRepository.getCompanyEntityByStudid(studentId);
-		System.out.println("List of Companies"+companies);
+		List<CompanyEntity> companies = this.companyRepository.getCompanyEntityByPlacid(placementId);
+		//System.out.println("List of Companies"+companies);
 		List<CompanyDto> companyDtoList = companies.stream().map(company->this.modelMapper.map(company, CompanyDto.class)).collect(Collectors.toList());
 		return companyDtoList;
 	}

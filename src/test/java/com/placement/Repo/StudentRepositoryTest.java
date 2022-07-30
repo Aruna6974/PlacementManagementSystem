@@ -46,7 +46,7 @@ public class StudentRepositoryTest
 	@Order(1)
 	public void getStudentById()
 	{
-		StudentEntity student=studentRepository.findById(101).get();
+		StudentEntity student=studentRepository.findById(1).get();
 		Assertions.assertThat(student.getStudentId()).isGreaterThan(0);
 	}
 	@Test
@@ -60,7 +60,7 @@ public class StudentRepositoryTest
 	@Order(3)
 	public void updateStudent()
 	{
-		StudentEntity student=studentRepository.findById(102).get();
+		StudentEntity student=studentRepository.findById(1).get();
 		student.setStudentEmail("aruna@gmail.com");
 		StudentEntity student1=studentRepository.save(student);
 		Assertions.assertThat(student1.getStudentEmail()).isEqualTo("aruna@gmail.com");
@@ -69,7 +69,7 @@ public class StudentRepositoryTest
 	@Order(5)
 	public void deleteStudent()
 	{
-		 StudentEntity student = studentRepository.findById(102).get();
+		 StudentEntity student = studentRepository.findById(2).get();
 		 studentRepository.delete(student);
 		  StudentEntity student1=null;
 		  Optional<StudentEntity> optionalStudent=studentRepository.findBystudentEmail("aruna@gmail.com");

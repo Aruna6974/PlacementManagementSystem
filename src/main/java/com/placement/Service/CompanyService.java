@@ -8,7 +8,7 @@ import com.placement.payloads.CompanyDto;
 public interface CompanyService 
 {
 
-	public CompanyDto createCompany(CompanyDto companyDto,int studentId);
+	public CompanyDto createCompany(CompanyDto companyDto,int placementId);
 	
 	public CompanyDto getCompanyById(int companyId);
 	 
@@ -18,7 +18,8 @@ public interface CompanyService
 	
 	public void deleteCompanyById(int companyId);
 	
-	public List<CompanyDto> getAllCompaniesByStudent(int studentId);
+	//public List<CompanyDto> getAllCompaniesByStudent(int studentId);
+	public List<CompanyDto> getAllCompaniesByPlacementId(int placementId);
 	
 	
 

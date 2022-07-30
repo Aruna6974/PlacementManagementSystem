@@ -7,15 +7,22 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.placement.entity.CompanyEntity;
 import com.placement.entity.PlacementEntity;
+import com.placement.entity.StudentEntity;
 import com.placement.entity.TrainingEntity;
 import com.placement.exception.ResourceNotFoundException;
+import com.placement.payloads.CompanyDto;
 import com.placement.payloads.PlacementDto;
+import com.placement.payloads.StudentDto;
+import com.placement.payloads.TrainingDto;
+import com.placement.repository.CompanyRepository;
 import com.placement.repository.PlacementRepository;
+import com.placement.repository.StudentRepository;
 import com.placement.repository.TrainingRepository;
 import com.placement.service.PlacementService;
 @Service
-public class PlacementServiceImpl  implements PlacementService
+public class PlacementServiceImplementation  implements PlacementService
 {
 	
 	@Autowired
@@ -25,18 +32,22 @@ public class PlacementServiceImpl  implements PlacementService
 	private ModelMapper modelMapper;
 	
 	@Autowired
-	private TrainingRepository trainingRepository;
-
+	private CompanyRepository companyRepository;
+	
+	@Autowired
+	private StudentRepository studentRepository;
 	@Override
-	public PlacementDto createPlacement(PlacementDto placementDto, int trainingId)
+	public PlacementDto createPlacement(PlacementDto placementDto, int studentId)
 	{
-		TrainingEntity trainingEntity = this.trainingRepository.findById(trainingId).
-				    orElseThrow(
-				    		()->new ResourceNotFoundException("Training","TrainingId",trainingId));
-		placementDto.setTraining(trainingEntity);
-		PlacementEntity placementEntity = this.placementRepository.save(this.placementDtoToPlacementEntity(placementDto));
+		StudentEntity studentEntity=this.studentRepository.findById(studentId).
+				 orElseThrow(
+						 ()->new ResourceNotFoundException("Student","StudentId",studentId));
+		PlacementEntity placementEntity=this.modelMapper.map(placementDto, PlacementEntity.class);
+		placementEntity.setStudent(studentEntity);			
+		//placementDto.setStudent(this.modelMapper.map(studentEntity, StudentDto.class));
+		PlacementEntity createdPlacement = this.placementRepository.save(placementEntity);
 		
-		return this.placementEntityToPlacementDto(placementEntity);
+		return this.modelMapper.map(createdPlacement, PlacementDto.class);
 	}
 
 	
@@ -47,13 +58,17 @@ public class PlacementServiceImpl  implements PlacementService
 		PlacementEntity placementEntity = this.placementRepository.findById(placementId).
 				     orElseThrow(
 				    		 ()->new ResourceNotFoundException("Placement","PlacementId",placementId));
+		
 		return this.placementEntityToPlacementDto(placementEntity);
 	}
 
 	@Override
 	public List<PlacementDto> getAllPlacements() 
 	{
-		List<PlacementDto> getAllPlacements = this.placementRepository.findAll().stream().map(placement->this.placementEntityToPlacementDto(placement)).collect(Collectors.toList());
+		List<PlacementEntity> placementList=this.placementRepository.findAll();
+		//System.out.println("List of Placements"+placementList);
+		List<PlacementDto> getAllPlacements = placementList.stream().map(placement->this.modelMapper.map(placement, PlacementDto.class)).collect(Collectors.toList());
+		
 		return getAllPlacements;
 	}
 
@@ -86,16 +101,32 @@ public class PlacementServiceImpl  implements PlacementService
 	}
 
 	@Override
-	public List<PlacementDto> getAllPlacementsByTraining(int trainingId) 
+	public List<PlacementDto> getAllPlacementsByStudentId(int studentId) 
 	{
-//		TrainingEntity trainingEntity = this.trainingRepository.findById(trainingId).
-//			    orElseThrow(
-//			    		()->new ResourceNotFoundException("Training","TrainingId",trainingId));
-		List<PlacementEntity> placements = this.placementRepository.getPlacementEntityByPlacid(trainingId);
-		System.out.println("List Of Placements"+placements);
+		List<PlacementEntity> placements = this.placementRepository.getPlacementEntityByStudid(studentId);
+		//System.out.println("List Of Placements"+placements);
 		List<PlacementDto> placementDtoList = placements.stream().map(placement->this.modelMapper.map(placement, PlacementDto.class)).collect(Collectors.toList()); 
 		
 		return placementDtoList;
 	}
+
+
+
+	@Override
+	public long getCountOfPlacements()
+	{
+		long Count=placementRepository.count();
+		return Count;
+	}
+
+
+//
+//	@Override
+//	public List<PlacementDto> getPlacementCounts(String placementType) 
+//	{
+////		List<PlacementEntity> placements=this.placementRepository.aMethodNameOrSomething(placementType);
+////		List<PlacementDto> placaementList=placements.stream().map(placement->this.modelMapper.map(placement, PlacementDto.class)).collect(Collectors.toList());
+////		return placaementList;
+//	}
 
 }

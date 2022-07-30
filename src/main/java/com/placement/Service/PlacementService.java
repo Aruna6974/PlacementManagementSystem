@@ -6,7 +6,7 @@ import com.placement.payloads.PlacementDto;
 
 public interface PlacementService 
 {
-	 public PlacementDto createPlacement(PlacementDto placementDto,int trainingId);
+	 public PlacementDto createPlacement(PlacementDto placementDto,int studentId);
 	
      public PlacementDto getPlacementById(int placementId);
      
@@ -16,6 +16,11 @@ public interface PlacementService
      
      public void deletePlacementById(int placementId);
      
-     public List<PlacementDto> getAllPlacementsByTraining(int trainingId);
+   //  public List<PlacementDto> getAllPlacementsByCompany(int companyId);
+     public List<PlacementDto> getAllPlacementsByStudentId(int studentId);
+     
+   //  public List<PlacementDto> getPlacementCounts(String placementType);
+     
+     public long getCountOfPlacements();
 }
 

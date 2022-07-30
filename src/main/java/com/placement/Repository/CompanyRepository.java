@@ -14,12 +14,12 @@ import com.placement.payloads.CompanyDto;
 public interface CompanyRepository  extends JpaRepository<CompanyEntity,Integer>
 {
 
-	List<CompanyEntity> findByStudent(StudentEntity studentEntity);
+	//List<CompanyEntity> findByStudent(StudentEntity studentEntity);
 	
 	
-@Query(value = "SELECT * FROM company_entity comp WHERE comp.student_student_id = :studid",nativeQuery = true)
+@Query(value = "SELECT * FROM company comp WHERE comp.placement_placement_id = :placid",nativeQuery = true)
 	
-	public List<CompanyEntity> getCompanyEntityByStudid( @Param("studid") int studid);
+	public List<CompanyEntity> getCompanyEntityByPlacid( @Param("placid") int placid);
 
 	Optional<CompanyEntity> findBycompanyType(String companyType);
 

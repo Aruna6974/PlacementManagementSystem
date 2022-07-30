@@ -14,9 +14,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -32,13 +34,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
+@Table(name="Training")
 public class TrainingEntity
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@SequenceGenerator(name = "train", initialValue = 101, sequenceName = "train")
-//	@GeneratedValue(strategy = GenerationType.IDENTITY, generator = "train")
-
 	private int trainingId;
 	
 	@Column(nullable = false)
@@ -54,12 +54,11 @@ public class TrainingEntity
 	@Column(nullable = false)
 	private String trainingYear;
 	
+	
 	@ManyToOne
 	private CompanyEntity company;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-
-	private List<PlacementEntity> placementEntity = new ArrayList<PlacementEntity>();
+	
 	
 	
 

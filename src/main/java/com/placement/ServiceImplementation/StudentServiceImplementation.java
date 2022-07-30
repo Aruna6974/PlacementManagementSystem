@@ -22,7 +22,7 @@ import com.placement.repository.StudentRepository;
 import com.placement.service.StudentService;
 
 @Service
-public class StudentServiceImpl implements StudentService
+public class StudentServiceImplementation implements StudentService
 {
 	@Autowired
 	private StudentRepository studentRepository;
@@ -33,8 +33,6 @@ public class StudentServiceImpl implements StudentService
 	@Autowired
 	private ModelMapper modelMapper;
 	
-	@Autowired
-	private CompanyRepository companyRepository;
 
 	@Override
 	public StudentDto createStudent(StudentDto student,int adminId) 
@@ -42,13 +40,14 @@ public class StudentServiceImpl implements StudentService
 		AdminEntity adminEntity=this.adminRepository.findById(adminId).
 				                orElseThrow(
 				                		()->new ResourceNotFoundException("Admin","AdminId",adminId));
-		student.setAdmin(adminEntity);
-		//StudentEntity studentEntity=this.modelMapper.map(student, StudentEntity.class);
-		//studentEntity.setAdmin(adminEntity);
-		List<CompanyEntity> company = this.companyRepository.findAll();
-		List<CompanyDto> companyDtoList = company.stream().map(companies->this.modelMapper.map(companies, CompanyDto.class)).collect(Collectors.toList());
-		student.setCompayDtoList(companyDtoList);
-		StudentEntity savedStudent=this.studentRepository.save(this.modelMapper.map(student, StudentEntity.class));
+		StudentEntity studentEntity=this.modelMapper.map(student, StudentEntity.class);
+		studentEntity.setAdmin(adminEntity);				
+		//student.setAdmin(this.modelMapper.map(adminEntity, AdminDto.class));
+//		List<CompanyEntity> company = this.companyRepository.findAll();
+//		List<CompanyDto> companyDtoList = company.stream().map(companies->this.modelMapper.map(companies, CompanyDto.class)).collect(Collectors.toList());
+//		student.setCompany(companyDtoList);
+		
+		StudentEntity savedStudent=this.studentRepository.save(studentEntity);
 		return this.modelMapper.map(savedStudent, StudentDto.class);
 	}
 
@@ -73,14 +72,6 @@ public class StudentServiceImpl implements StudentService
 		StudentEntity studentEntity = this.studentRepository.
 				findById(studentId).orElseThrow(
 						()->new ResourceNotFoundException("Student", "StudentId",studentId));
-//		studentEntity.setStudentId(studentDto.getStudentId());
-//		studentEntity.setStudentName(studentDto.getStudentName());
-//		studentEntity.setStudentEmail(studentDto.getStudentEmail());
-//		studentEntity.setStudentContact(studentDto.getStudentContact());
-//		studentEntity.setStudentQualification(studentDto.getStudentQualification());
-//		studentEntity.setPassword(studentDto.getPassword());
-		//return this.studentEntityToStudentDto(studentEntity);
-		//return this.modelMapper.map(studentEntity, StudentDto.class);
 		StudentEntity updateStudent = this.studentRepository.save(this.studentDtoToStudentEntity(studentDto));
 		return this.studentEntityToStudentDto(updateStudent);
 	}
@@ -97,7 +88,6 @@ public class StudentServiceImpl implements StudentService
 	public StudentEntity studentDtoToStudentEntity(StudentDto studentDto)
 	{
 		StudentEntity studentEntity = new StudentEntity();
-		//UserDto userDto = new UserDto();
 		studentEntity.setStudentId(studentDto.getStudentId());
 		studentEntity.setStudentName(studentDto.getStudentName());
 		studentEntity.setStudentEmail(studentDto.getStudentEmail());
@@ -110,7 +100,6 @@ public class StudentServiceImpl implements StudentService
 	public StudentDto studentEntityToStudentDto(StudentEntity studentEntity)
 	{
 		StudentDto studentDto = new StudentDto();
-		//UserEntity userEntity = new UserEntity();
 		studentDto.setStudentId(studentEntity.getStudentId());
 		studentDto.setStudentName(studentEntity.getStudentName());
 		studentDto.setStudentEmail(studentEntity.getStudentEmail());

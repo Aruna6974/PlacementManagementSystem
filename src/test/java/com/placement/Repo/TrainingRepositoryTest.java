@@ -15,8 +15,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.placement.entity.CompanyEntity;
+import com.placement.entity.PlacementEntity;
 import com.placement.entity.TrainingEntity;
 import com.placement.repository.CompanyRepository;
+import com.placement.repository.PlacementRepository;
 import com.placement.repository.TrainingRepository;
 
 @RunWith(SpringRunner.class)
@@ -32,7 +34,7 @@ public class TrainingRepositoryTest
 	private TrainingRepository trainingRepository;
 	
 	@Autowired
-	private CompanyRepository companyRepository;
+	private PlacementRepository placementRepository;
 	
 	@Test
 	@Order(1)
@@ -50,7 +52,7 @@ public class TrainingRepositoryTest
 	@Order(1)
 	public void getTrainingById()
 	{
-		TrainingEntity training=trainingRepository.findById(101).get();
+		TrainingEntity training=trainingRepository.findById(1).get();
 		Assertions.assertThat(training.getTrainingId()).isGreaterThan(0);
 	}
 	@Test
@@ -64,7 +66,7 @@ public class TrainingRepositoryTest
 	@Order(3)
 	public void updateTraining()
 	{
-		TrainingEntity training=trainingRepository.findById(102).get();
+		TrainingEntity training=trainingRepository.findById(1).get();
 		training.setTrainingName("Data Science");
 		TrainingEntity training1=trainingRepository.save(training);
 		Assertions.assertThat(training1.getTrainingName()).isEqualTo("Data Science");
@@ -73,7 +75,7 @@ public class TrainingRepositoryTest
 	@Order(5)
 	public void deleteTraining()
 	{
-		 TrainingEntity training = trainingRepository.findById(102).get();
+		 TrainingEntity training = trainingRepository.findById(1).get();
 		 trainingRepository.delete(training);
 		  TrainingEntity training1=null;
 		  Optional<TrainingEntity> optionaltraining=trainingRepository.findBytrainingBatch("IT");
@@ -88,10 +90,11 @@ public class TrainingRepositoryTest
 
 	@Test
 	@Order(6)
-	public void getTrainingByCompanyId()
+	public void getTrainingByPlacementId()
 	{
-		CompanyEntity company=companyRepository.findById(102).get();
-		List<TrainingEntity> trainingList=trainingRepository.findByCompany(company);
+		PlacementEntity placement=placementRepository.findById(1).get();
+//		CompanyEntity company=companyRepository.findById(102).get();
+		List<TrainingEntity> trainingList=trainingRepository.findByPlacement(placement);
 		Assertions.assertThat(trainingList.size()).isGreaterThan(0);
 	}
 }

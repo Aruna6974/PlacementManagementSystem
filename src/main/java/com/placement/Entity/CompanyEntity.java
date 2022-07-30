@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -31,6 +32,7 @@ import java.util.*;
 @ToString
 @Entity
 @Builder
+@Table(name="Company")
 public class CompanyEntity
 {
 	@Id
@@ -50,10 +52,13 @@ public class CompanyEntity
 	private String companyDescription;
 	
 	@ManyToOne
-	private StudentEntity student;
+	private PlacementEntity placement;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<TrainingEntity> trainingEntity = new ArrayList<TrainingEntity>();
+//	@OneToMany(mappedBy = "company",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	private List<PlacementEntity> placement = new ArrayList<PlacementEntity>();
+	
+	@OneToMany(mappedBy = "company",cascade  = CascadeType.ALL,fetch = FetchType.LAZY)
+	private List<TrainingEntity> training=new ArrayList<>();
 	
 
 }

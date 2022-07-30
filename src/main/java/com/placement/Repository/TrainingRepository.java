@@ -8,14 +8,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.placement.entity.CompanyEntity;
+import com.placement.entity.PlacementEntity;
 import com.placement.entity.TrainingEntity;
 
 public interface TrainingRepository extends JpaRepository<TrainingEntity, Integer>
 {
 
-	List<TrainingEntity> findByCompany(CompanyEntity companyEntity);
+	//List<TrainingEntity> findByPlacement(PlacementEntity placementEntity);
 	
-@Query(value = "SELECT * FROM Training_entity train WHERE train. company_company_id = :compid",nativeQuery = true)
+@Query(value = "SELECT * FROM Training train WHERE train.company_company_id = :compid",nativeQuery = true)
 	
 	public List<TrainingEntity> getTrainingEntityByCompid( @Param("compid") int compid);
 

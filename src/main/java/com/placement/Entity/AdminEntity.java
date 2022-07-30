@@ -6,14 +6,18 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,6 +33,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
+@Table(name="Admin")
 public class AdminEntity 
 {
 	@Id
@@ -44,8 +49,12 @@ public class AdminEntity
 	@Column(nullable=false)
 	private String password;
 	
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<StudentEntity> studentEntity=new ArrayList<StudentEntity>();
+	@OneToMany(mappedBy = "admin",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	//@JsonManagedReference
+	private List<StudentEntity> student=new ArrayList<StudentEntity>();
+	
+//	@OneToMany(mappedBy = "admin",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+//	private List<PlacementEntity> placement=new ArrayList<>();
 
 	
 }

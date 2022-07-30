@@ -7,18 +7,22 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.placement.entity.CompanyEntity;
 import com.placement.entity.PlacementEntity;
 import com.placement.entity.TrainingEntity;
 
 public interface PlacementRepository extends JpaRepository<PlacementEntity, Integer>
 {
 
-	List<PlacementEntity> findByTraining(TrainingEntity trainingEntity);
+//	List<PlacementEntity> findByCompany(CompanyEntity companyEntity);
 	
-@Query(value = "SELECT * FROM placement_entity plac WHERE plac.training_training_id = :placid",nativeQuery = true)
+@Query(value = "SELECT * FROM placement plac WHERE plac.student_student_id = :studid",nativeQuery = true)
 	
-	public List<PlacementEntity> getPlacementEntityByPlacid( @Param("placid") int placid);
+	public List<PlacementEntity> getPlacementEntityByStudid( @Param("studid") int studid);
 
-	Optional<PlacementEntity> findByplacementType(String placementtype);
+	Optional<PlacementEntity> findByplacementType(String placementType);
+	
+//	 @Query("SELECT COUNT(placement) FROM Placement placement WHERE placement.placementType=:placementType")
+//	    List<PlacementEntity> aMethodNameOrSomething(@Param("placementType") String placementType);
 
 }

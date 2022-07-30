@@ -2,6 +2,7 @@ package com.placement.payloads;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.placement.entity.CompanyEntity;
 import com.placement.entity.PlacementEntity;
 
@@ -27,7 +28,6 @@ public class TrainingDto
 	
 	private String trainingYear;
 
-	private CompanyEntity company;
-	
-	private List<PlacementDto> placementDtoList;
+	@JsonBackReference
+	private CompanyDto company;
 }

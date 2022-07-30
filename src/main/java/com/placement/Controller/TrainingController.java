@@ -75,9 +75,9 @@ public class TrainingController
 	
 	//To fetch training record by Using company id
 	@GetMapping("/trainings/{companyId}")
-	public ResponseEntity<List<TrainingDto>> getAllTrainingsByCompany(@PathVariable int companyId)
+	public ResponseEntity<List<TrainingDto>> getAllTrainingsByCompanyId(@PathVariable int companyId)
 	{
-		List<TrainingDto> getAllTrainings = this.trainingService.getAllTrainingsByCompany(companyId);
+		List<TrainingDto> getAllTrainings = this.trainingService.getAllTrainingsByCompanyId(companyId);
 		return new ResponseEntity<List<TrainingDto>>(getAllTrainings,HttpStatus.OK);
 	}
 

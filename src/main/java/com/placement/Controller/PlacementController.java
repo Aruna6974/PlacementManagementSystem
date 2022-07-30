@@ -27,10 +27,10 @@ public class PlacementController
 	private PlacementService placementService;
 	
 	//To create a placement resources
-	@PostMapping("/training/{trainingId}/placement")
-	public ResponseEntity<PlacementDto> createPlacement(@PathVariable int trainingId,@RequestBody PlacementDto placementDto)
+	@PostMapping("/student/{studentId}/placement")
+	public ResponseEntity<PlacementDto> createPlacement(@PathVariable int studentId,@RequestBody PlacementDto placementDto)
 	{
-		PlacementDto createdPlacement = this.placementService.createPlacement(placementDto, trainingId);
+		PlacementDto createdPlacement = this.placementService.createPlacement(placementDto, studentId);
 		return new ResponseEntity<PlacementDto>(createdPlacement,HttpStatus.OK);
 		
 	}
@@ -70,11 +70,18 @@ public class PlacementController
 		return new ResponseEntity<ApiResponse>(response,HttpStatus.OK);
 	}
 	
-	//To fetch placement record by using training id
-	@GetMapping("/placements/{trainingId}")
-	public ResponseEntity<List<PlacementDto>> getAllPlacementsByTraining(@PathVariable int trainingId)
+	//To fetch placement record by using student id
+	@GetMapping("/placements/{studentId}")
+	public ResponseEntity<List<PlacementDto>> getAllPlacementsByStudent(@PathVariable int studentId)
 	{
-		List<PlacementDto> getAllPlacements = this.placementService.getAllPlacementsByTraining(trainingId);
+		List<PlacementDto> getAllPlacements = this.placementService.getAllPlacementsByStudentId(studentId);
 		return new ResponseEntity<List<PlacementDto>>(getAllPlacements,HttpStatus.OK);
+	}
+	
+	@GetMapping("/count")
+	public long CountPlacements()
+	{
+		long Count=placementService.getCountOfPlacements();
+		return Count;
 	}
 }

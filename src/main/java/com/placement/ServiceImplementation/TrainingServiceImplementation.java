@@ -11,6 +11,7 @@ import com.placement.entity.CompanyEntity;
 import com.placement.entity.PlacementEntity;
 import com.placement.entity.TrainingEntity;
 import com.placement.exception.ResourceNotFoundException;
+import com.placement.payloads.CompanyDto;
 import com.placement.payloads.PlacementDto;
 import com.placement.payloads.TrainingDto;
 import com.placement.repository.CompanyRepository;
@@ -18,32 +19,28 @@ import com.placement.repository.PlacementRepository;
 import com.placement.repository.TrainingRepository;
 import com.placement.service.TrainingService;
 @Service
-public class TrainingServiceImpl implements TrainingService
+public class TrainingServiceImplementation implements TrainingService
 {
 	@Autowired
 	private TrainingRepository trainingRepository;
 	
 	@Autowired
 	private ModelMapper modelMapper;
-	
+		
 	@Autowired
-	private CompanyRepository companyrepository;
-	
-	@Autowired
-	private PlacementRepository placementRepository;
+    private CompanyRepository companyRepository;
 	
 	@Override
 	public TrainingDto createTraining(TrainingDto trainingDto,int companyId)
 	{
-		CompanyEntity companyEntity = this.companyrepository.findById(companyId).
+		CompanyEntity companyEntity = this.companyRepository.findById(companyId).
 				       orElseThrow(
 				    		   ()->new ResourceNotFoundException("Company", "CompanyId", companyId));
-		trainingDto.setCompany(companyEntity);
-		List<PlacementEntity> placements = this.placementRepository.findAll();
-		List<PlacementDto> placementDtoList = placements.stream().map(placement->this.modelMapper.map(placement, PlacementDto.class)).collect(Collectors.toList());
-		trainingDto.setPlacementDtoList(placementDtoList);
-		TrainingEntity trainingEntity = this.trainingRepository.save(this.trainingDtoToTrainingEntity(trainingDto));
-		return this.trainingEntityToTrainingDto(trainingEntity);
+		TrainingEntity trainingEntity=this.modelMapper.map(trainingDto, TrainingEntity.class);
+		trainingEntity.setCompany(companyEntity);
+		//trainingDto.setCompany(this.modelMapper.map(companyEntity, CompanyDto.class));
+		TrainingEntity savedtraining = this.trainingRepository.save(trainingEntity);
+		return this.modelMapper.map(savedtraining, TrainingDto.class);
 	}
 
 	
@@ -85,13 +82,10 @@ public class TrainingServiceImpl implements TrainingService
 	}
 
 	@Override
-	public List<TrainingDto> getAllTrainingsByCompany(int companyId) 
+	public List<TrainingDto> getAllTrainingsByCompanyId(int companyId) 
 	{
-//		CompanyEntity companyEntity = this.companyrepository.findById(companyId).
-//				   orElseThrow(
-//						   ()->new ResourceNotFoundException("Company","CompanyId",companyId));
 		List<TrainingEntity> trainings = this.trainingRepository.getTrainingEntityByCompid(companyId);
-		System.out.println("List Of Trainings"+trainings);
+		//System.out.println("List Of Trainings"+trainings);
 		List<TrainingDto> trainingDtoList = trainings.stream().map(training->this.modelMapper.map(training, TrainingDto.class)).collect(Collectors.toList());
 		
 		return trainingDtoList;

@@ -2,6 +2,8 @@ package com.placement.payloads;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.placement.entity.AdminEntity;
 
 import lombok.AllArgsConstructor;
@@ -28,10 +30,11 @@ public class StudentDto
 	private String studentQualification;
 	
 	private String password;
+	@JsonBackReference
+	private AdminDto admin;
 	
-	private AdminEntity admin;
-	
-	private List<CompanyDto> compayDtoList;
+	@JsonManagedReference
+	private PlacementDto placement;
 	
 	
 }

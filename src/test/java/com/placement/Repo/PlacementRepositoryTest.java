@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.placement.entity.CompanyEntity;
 import com.placement.entity.PlacementEntity;
 import com.placement.entity.TrainingEntity;
 import com.placement.repository.CompanyRepository;
@@ -31,7 +32,7 @@ public class PlacementRepositoryTest
 	private PlacementRepository placementRepository;
 	
 	@Autowired
-	private TrainingRepository trainingRepository;
+	private CompanyRepository companyRepository;
 	
 	@Test
 	@Order(1)
@@ -49,7 +50,7 @@ public class PlacementRepositoryTest
 	@Order(1)
 	public void getPlacementById()
 	{
-		PlacementEntity placement=placementRepository.findById(101).get();
+		PlacementEntity placement=placementRepository.findById(1).get();
 		Assertions.assertThat(placement.getPlacementId()).isGreaterThan(0);
 	}
 	@Test
@@ -63,7 +64,7 @@ public class PlacementRepositoryTest
 	@Order(3)
 	public void updatePlacement()
 	{
-		PlacementEntity placement=placementRepository.findById(102).get();
+		PlacementEntity placement=placementRepository.findById(1).get();
 		placement.setPlacementCompanyName("TCS");
 	    PlacementEntity placement1=placementRepository.save(placement);
 		Assertions.assertThat(placement1.getPlacementCompanyName()).isEqualTo("TCS");
@@ -72,7 +73,7 @@ public class PlacementRepositoryTest
 	@Order(5)
 	public void deletePlacement()
 	{
-		 PlacementEntity placement = placementRepository.findById(102).get();
+		 PlacementEntity placement = placementRepository.findById(1).get();
 		 placementRepository.delete(placement);
 		  PlacementEntity placement1=null;
 		  Optional<PlacementEntity> optionalPlacement=placementRepository.findByplacementType("Data Science");
@@ -86,10 +87,12 @@ public class PlacementRepositoryTest
 
 	@Test
 	@Order(6)
-	public void getPlacementByTraining()
+	public void getPlacementByCompany()
 	{
-		TrainingEntity training=trainingRepository.findById(102).get();
-		List<PlacementEntity> placementList=placementRepository.findByTraining(training);
+		CompanyEntity company=companyRepository.findById(1).get();
+		List<PlacementEntity> placementList=placementRepository.findByCompany(company);
+//		TrainingEntity training=trainingRepository.findById(102).get();
+//		List<PlacementEntity> placementList=placementRepository.findbyc;
 		Assertions.assertThat(placementList.size()).isGreaterThan(0);
 	}
 
